@@ -13,16 +13,23 @@ __Sản phẩm:__
 
 ## TÁC GIẢ
 
-- Tên nhóm:
+- Tên nhóm:bốn anh tài
 - Thành viên trong nhóm
-  |STT|Họ tên|MSSV|Công việc|
+
+|STT|Họ tên|MSSV|Công việc|
+  |--|--|--|--|
+  | 1 | Trịnh Hải Bình | 20235376 | Thiết kế logic game, thiết kế sơ bộ giao diện, bước đầu thiết kế game |
+  | 2 | Lê Công Dũng | 20235300 | Thiết kế giao diện game, xử lý các ngắt, flash |
+  | 3 | Trần Viết Linh | 20235364 | Phát triển logic tạo khối ngẫu nhiên, di chuyển khối, đổi màu khối |
+  | 4 | Đào Quốc Đại | 20235290 | Xử lý ngắt, xử lý chế độ rung, logic tích điểm, phát triển logic game |
   
 
 ## MÔI TRƯỜNG HOẠT ĐỘNG
 
 - STM32F429ZIT6
 - Bộ kit STM32F429ZIT6 tích hợp cảm biến, màn hình cảm ứng
-- Module dfplayer mini cho việc phát âm thanh
+- Module rung cho việc báo hiệu hàng đã được ăn
+- 4 nút đơn cho việc điều khiển chế độ game
 
 ## SO ĐỒ SCHEMATIC
 ![image](./?.png)
