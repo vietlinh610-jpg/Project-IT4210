@@ -1,0 +1,730 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Name": "Screen1",
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": -8,
+            "Y": -115,
+            "Width": 227,
+            "Height": 40,
+            "TextId": "__SingleUse_1CQX",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 252,
+              "Green": 216,
+              "Blue": 10
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "scalableImage1",
+            "Width": 240,
+            "Height": 320,
+            "Filename": "start_screen.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 334,
+            "Y": 107,
+            "Width": 134,
+            "Height": 24,
+            "TextId": "__SingleUse_16LT",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 245,
+              "Green": 12,
+              "Blue": 12
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "highestScore",
+            "X": -240,
+            "Y": 78,
+            "Width": 240,
+            "Height": 41,
+            "TextId": "__SingleUse_MS31",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_S6TU",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "Button",
+            "Name": "button1",
+            "X": 19,
+            "Y": 204,
+            "Width": 200,
+            "Height": 83,
+            "Pressed": "Start-Button-Vector.png",
+            "Released": "Start-Button-Vector.png",
+            "Alpha": 229
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "button1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen2"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen2",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "Width": 240,
+            "Height": 321,
+            "RelativeFilename": "Gemini_Generated_Image_etna4ietna4ietna.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 68,
+            "Y": 13,
+            "Width": 101,
+            "Height": 40,
+            "TextId": "__SingleUse_DG2Y",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 196,
+              "Green": 195,
+              "Blue": 214
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "Button",
+            "Name": "easy",
+            "X": 82,
+            "Y": 100,
+            "Width": 81,
+            "Height": 50,
+            "Pressed": "easy.png",
+            "Released": "easy.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "hard",
+            "X": 82,
+            "Y": 253,
+            "Width": 78,
+            "Height": 50,
+            "Pressed": "hard.png",
+            "Released": "hard.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "medium",
+            "X": 81,
+            "Y": 179,
+            "Width": 79,
+            "Height": 50,
+            "Pressed": "medium.png",
+            "Released": "medium.png"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "X": 207,
+            "Y": 286,
+            "Width": 33,
+            "Height": 34,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "IconButtonStyle",
+                "IconReleased": "Blue_Icons_Home_32.png",
+                "IconPressed": "Blue_Icons_Home_32.png"
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 59,
+            "Y": 63,
+            "Width": 140,
+            "Height": 24,
+            "TextId": "__SingleUse_81UY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_905N",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "HasCompletedTrigger": true,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "hard"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen3"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "HasCompletedTrigger": true,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "easy"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen3"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "HasCompletedTrigger": true,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "medium"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen3"
+            }
+          },
+          {
+            "InteractionName": "handleHard",
+            "Trigger": {
+              "Type": "TriggerInteractionCompleted",
+              "InteractionToTriggerOn": "Interaction1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "hardBtn"
+            }
+          },
+          {
+            "InteractionName": "handleEasy",
+            "Trigger": {
+              "Type": "TriggerInteractionCompleted",
+              "InteractionToTriggerOn": "Interaction2"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "easyBtn"
+            }
+          },
+          {
+            "InteractionName": "handleMedium",
+            "Trigger": {
+              "Type": "TriggerInteractionCompleted",
+              "InteractionToTriggerOn": "Interaction3"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "mediumBtn"
+            }
+          },
+          {
+            "InteractionName": "Interaction4",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "Screen1"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen3",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "Width": 240,
+            "Height": 321,
+            "RelativeFilename": "screen_main_game1.png"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "X": 173,
+            "Y": 243,
+            "Width": 50,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "IconButtonStyle",
+                "X": 8,
+                "Y": -2,
+                "IconReleased": "__generated\\icon_theme_images_action_home_35_35_F01313.svg.png",
+                "IconPressed": "__generated\\icon_theme_images_action_home_35_35_000000.svg.png"
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 177,
+            "Y": -41,
+            "Width": 43,
+            "Height": 24,
+            "TextId": "__SingleUse_2ARM",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 174,
+              "Green": 11,
+              "Blue": 214
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 47,
+            "Y": -41,
+            "Width": 55,
+            "Height": 24,
+            "TextId": "__SingleUse_YAJW",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 176,
+              "Green": 12,
+              "Blue": 201
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "score",
+            "X": 177,
+            "Y": 138,
+            "Width": 25,
+            "Height": 32,
+            "TextId": "__SingleUse_HSY0",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_4X0T",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "Image",
+            "Name": "image2",
+            "X": -29,
+            "Y": 74,
+            "Width": 240,
+            "Height": 193,
+            "RelativeFilename": "gameover.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "X": 173,
+            "Y": 181,
+            "Width": 50,
+            "Height": 16,
+            "TextId": "__SingleUse_FS15",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 240,
+              "Green": 17,
+              "Blue": 17
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_07O7",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton2",
+            "X": 170,
+            "Y": 205,
+            "Width": 53,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ToggleButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "IconButtonStyle",
+                "X": 9,
+                "Y": -1,
+                "IconReleased": "__generated\\icon_theme_images_av_pause_35_35_E8F6FB.svg.png",
+                "IconPressed": "__generated\\icon_theme_images_action_not_started_35_35_E8F6FB.svg.png"
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton2"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "pauseBtn"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen4",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "Width": 240,
+            "Height": 321,
+            "RelativeFilename": "start_screen.png"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "X": 44,
+            "Y": 222,
+            "Width": 155,
+            "Height": 19,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "TextId": "__SingleUse_VGI7",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorPressed": {
+                  "Red": 10,
+                  "Green": 10,
+                  "Blue": 10
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1_1",
+            "X": 44,
+            "Y": 240,
+            "Width": 155,
+            "Height": 19,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "TextId": "__SingleUse_CF30",
+                "TextRotation": "0",
+                "Wildcard1": {
+                  "TextId": "__SingleUse_28G7",
+                  "UseBuffer": true,
+                  "BufferSize": 10
+                },
+                "ColorReleased": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorPressed": {
+                  "Red": 10,
+                  "Green": 10,
+                  "Blue": 10
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1_2",
+            "X": 44,
+            "Y": 259,
+            "Width": 155,
+            "Height": 19,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "TextId": "__SingleUse_ISXC",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorPressed": {
+                  "Red": 10,
+                  "Green": 10,
+                  "Blue": 10
+                }
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen3"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton1_2"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen4"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen5",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "Width": 240,
+            "Height": 321,
+            "RelativeFilename": "start_screen.png"
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 59,
+            "Y": 204,
+            "Width": 123,
+            "Height": 24,
+            "Color": {
+              "Red": 22,
+              "Green": 12,
+              "Blue": 36
+            },
+            "BorderColor": {
+              "Red": 22,
+              "Green": 12,
+              "Blue": 36
+            },
+            "BorderSize": 5
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 77,
+            "Y": 204,
+            "Width": 87,
+            "Height": 16,
+            "TextId": "__SingleUse_O1ZT",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "ScrollList",
+            "Name": "scrollList1",
+            "X": 37,
+            "Y": 228,
+            "Width": 167,
+            "Height": 46,
+            "ItemTemplateName": "CustomContainer1",
+            "NumberofItems": 3,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0,
+            "OverShootPercentage": 75
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerNone"
+            },
+            "Action": {
+              "Type": "ActionNone"
+            }
+          }
+        ]
+      }
+    ],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "CustomContainer1",
+        "X": 37,
+        "Y": 228,
+        "Width": 167,
+        "Height": 46,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 55,
+            "Width": 33,
+            "Height": 16,
+            "TextId": "__SingleUse_ID3U",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 240,
+              "Green": 12,
+              "Blue": 12
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_GJ8M",
+              "UseBuffer": true,
+              "BufferSize": 20
+            }
+          }
+        ],
+        "Interactions": []
+      }
+    ],
+    "Name": "MyApplication_2",
+    "Resolution": {
+      "Width": 240,
+      "Height": 320
+    },
+    "SelectedColorDepth": 16,
+    "StartupScreenName": "Screen1",
+    "SelectedStartupLanguage": "GB",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "UIPath": ".",
+    "AvailableColorDepths": [
+      16
+    ],
+    "AvailableLCDs": {
+      "16": "LCD16bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [
+      {
+        "Width": 240,
+        "Height": 320
+      }
+    ],
+    "PhysicalButtons": [],
+    "FrameworkFeatures": {
+      "LCD16bpp": {
+        "Id": "LCD16bpp",
+        "IsEnabled": true
+      }
+    },
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j8",
+    "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j8",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "CompileTargetCommandOverride": "make -f ../gcc/Makefile -j8",
+    "FlashTargetCommandOverride": "make -f ../gcc/Makefile flash",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Portrait",
+    "Family": "STM32F4",
+    "SubFamily": "STM32F429/439",
+    "Toolchain": "STM32CubeIDE",
+    "Platform": "m4",
+    "ProjectFile": "../STM32F429I_DISCO_REV_D01.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [],
+    "AdditionalFeatures": [
+      "CWRVector",
+      "VectorFonts"
+    ]
+  },
+  "Version": "4.26.1",
+  "CreatedBy": "4.25.0"
+}

@@ -1,0 +1,5 @@
+../../TouchGFX/gui/include/gui/screen5_screen/Screen5Presenter.hpp:28:13:Screen5Presenter::~Screen5Presenter()	1
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen5_screen/Screen5Presenter.cpp:10:6:virtual void Screen5Presenter::activate()	1
+../../TouchGFX/gui/include/gui/screen5_screen/Screen5Presenter.hpp:28:13:virtual Screen5Presenter::~Screen5Presenter()	1
+../../TouchGFX/gui/include/gui/screen5_screen/Screen5Presenter.hpp:28:13:virtual void* Screen5Presenter::_ZThn4_N16Screen5PresenterD1Ev()	1
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen5_screen/Screen5Presenter.cpp:4:1:Screen5Presenter::Screen5Presenter(Screen5View&)	1

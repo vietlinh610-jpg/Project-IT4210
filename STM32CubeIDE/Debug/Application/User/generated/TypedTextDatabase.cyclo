@@ -1,0 +1,6 @@
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:51:43:const touchgfx::TypedText::TypedTextData* TypedTextDatabase::getInstance(touchgfx::LanguageId)	1
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:56:10:uint16_t TypedTextDatabase::getInstanceSize()	1
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:61:24:const touchgfx::Font** TypedTextDatabase::getFonts()	1
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:66:23:const touchgfx::Font* TypedTextDatabase::setFont(touchgfx::FontId, const touchgfx::Font*)	1
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:73:6:void TypedTextDatabase::resetFont(touchgfx::FontId)	4
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:88:1:cpp)	1

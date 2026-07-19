@@ -1,0 +1,4 @@
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/model/Model.cpp:5:1:Model::Model()	24	static
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/model/Model.cpp:17:6:void Model::tick()	0	static
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/model/Model.cpp:22:5:int Model::getHighestScore() const	0	static
+C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/model/Model.cpp:25:6:void Model::setHighestScore(int)	0	static

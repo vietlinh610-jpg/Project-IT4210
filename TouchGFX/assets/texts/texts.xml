@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="texts.xsd" Version="4.26.1">
+  <Languages>
+    <Language Id="GB" />
+  </Languages>
+  <Texts>
+    <TextGroup Id="Group1" />
+    <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_905N" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_81UY" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Hight Scores &lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GJ8M" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_ID3U" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">#1 - &lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_O1ZT" Alignment="Center" TypographyId="Small">
+        <Translation Language="GB">HIGHSCORES</Translation>
+      </Text>
+      <Text Id="__SingleUse_28G7" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB"> - EASY</Translation>
+      </Text>
+      <Text Id="__SingleUse_ISXC" Alignment="Center" TypographyId="Small">
+        <Translation Language="GB">HIGHSCORES</Translation>
+      </Text>
+      <Text Id="__SingleUse_CF30" Alignment="Center" TypographyId="Small">
+        <Translation Language="GB">LEVEL &lt;level&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_VGI7" Alignment="Center" TypographyId="Small">
+        <Translation Language="GB">START</Translation>
+      </Text>
+      <Text Id="__SingleUse_07O7" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Medium</Translation>
+      </Text>
+      <Text Id="__SingleUse_FS15" Alignment="Center" TypographyId="Small">
+        <Translation Language="GB">&lt;level&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_4X0T" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_HSY0" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YAJW" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Score</Translation>
+      </Text>
+      <Text Id="__SingleUse_2ARM" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Next</Translation>
+      </Text>
+      <Text Id="__SingleUse_DG2Y" Alignment="Left" TypographyId="Large">
+        <Translation Language="GB">Level</Translation>
+      </Text>
+      <Text Id="__SingleUse_S6TU" Alignment="Left" TypographyId="Large">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_MS31" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_16LT" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Highest Score</Translation>
+      </Text>
+      <Text Id="__SingleUse_1CQX" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Tetris Game</Translation>
+      </Text>
+    </TextGroup>
+  </Texts>
+  <Typographies>
+    <Typography Id="Default" Font="arialbd.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0x0-0x255" />
+    <Typography Id="Large" Font="arialbd.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0x0-0x255" />
+    <Typography Id="Small" Font="arialbd.ttf" Size="13" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />
+  </Typographies>
+</TextDatabase>
