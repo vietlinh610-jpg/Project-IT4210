@@ -26,10 +26,10 @@ __Sản phẩm:__
 
 ## MÔI TRƯỜNG HOẠT ĐỘNG
 
-- STM32F429ZIT6
-- Bộ kit STM32F429ZIT6 tích hợp cảm biến, màn hình cảm ứng
-- Module rung cho việc báo hiệu hàng đã được ăn
-- 4 nút đơn cho việc điều khiển chế độ game
+- Vi điều khiển STM32F429ZIT6
+- Bộ kit STM32F429ZIT6 được tích hợp cảm biến, màn hình cảm ứng
+- Module rung để thực hiện việc báo hiệu khi có hàng đã được ăn
+- 4 nút nhấn đơn phục vụ cho việc điều khiển khi chơi game
 
 ## SO ĐỒ SCHEMATIC
 ![image](./?.png)
@@ -42,15 +42,15 @@ __Sản phẩm:__
   |--|--|
   |STM32F429ZIT6|Bo mạch điều khiển chính, xử lý toàn bộ logic game và giao tiếp phần cứng|
   |Màn hình LCD|Hiển thị giao diện trò chơi Tetris và nhận thao tác Start qua cảm ứng|
-  |4 nút nhấn|Điều khiển trò chơi (di chuyển khối Tetris, xoay, thả nhanh)|
-  |Breadboard + dây nối	|Tạo mạch kết nối phần cứng giữa các thiết bị|
+  |4 nút nhấn|Cung cấp tín hiệu điều khiển trò chơi (di chuyển khối Tetris, xoay, thả nhanh)|
+  |Breadboard + dây nối	|Dùng để tạo mạch kết nối phần cứng giữa các thiết bị ngoại vi|
 
 * Phần mềm
 |Thành phần|Vai trò|
   |--|--|
-  |Firmware chính(C/C++)|Điều khiển game logic, xử lí giao tiếp với nút|
-  |TouchGFX|Thiết kế giao diện game|
-  |STM32CubeIDE|Môi trường phát triển, biên dịch và nạp chương trình|
+  |Firmware chính(C/C++)|Xử lý logic cốt lõi của game và điều kiển việc giao tiếp với các nút bấm|
+  |TouchGFX|Nền tảng được sử dụng để thiết kế giao diện đồ họa cho game|
+  |STM32CubeIDE|Đóng vai trò là môi trường phát triển, biên dịch và nạp chương trình|
 
 ### ĐẶC TẢ HÀM
 
