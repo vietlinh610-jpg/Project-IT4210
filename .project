@@ -8,4 +8,26 @@
 	</buildSpec>
 	<natures>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>image/finalgame.mp4</name>
+			<type>1</type>
+			<location>C:/Users/Nhinh/Downloads/finalgame.mp4</location>
+		</link>
+		<link>
+			<name>image/gameover.jpg</name>
+			<type>1</type>
+			<location>C:/Users/Nhinh/Downloads/OneDrive_1_15-07-2026/gameover.jpg</location>
+		</link>
+		<link>
+			<name>image/start.jpg</name>
+			<type>1</type>
+			<location>C:/Users/Nhinh/Downloads/start.jpg</location>
+		</link>
+		<link>
+			<name>image/test.jpg</name>
+			<type>1</type>
+			<location>C:/Users/Nhinh/Downloads/test.jpg</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -3,16 +3,18 @@
 __Đề bài__: Game Tetris
 
 __Sản phẩm:__
-1. Hiển thị giao diện đồ họa với màn hình TFT 240x320 thông qua bộ điều khiển LTDC của board
-2. Điều khiển trò chơi bằng phím cứng: cho phép di chuyển các khối sang trái/phải, xoay, rơi
-3. Quản lý lưới, phát hiện va chạm, kiểm tra và xóa hàng đầy
-4. Chia cấp độ trò chơi với 3 mức easy, medium, hard
+1. Hiển thị giao diện trò chơi với màn hình TFT 240x320 thông qua bộ điều khiển LTDC của board
+2. Điều khiển trò chơi bằng phím cứng bên ngoài: cho phép di chuyển các khối sang trái/phải, xoay, rơi
+3. Quản lý lưới, phát hiện va chạm,tạm dừng trò chơi, quay về trang chủ, kiểm tra và xóa hàng đầy
+4. Chia cấp độ trò chơi với 3 mức easy, medium, hard mỗi cấp độ có tốc độ khác nhau và mức độ điểm khác nhau
 5. Hiển thị điểm số, ghi điểm số cao nhất vào flash
 
-![Ảnh minh họa dự án Tetris Game với STM32](./?.jpg)
+![Ảnh minh họa dự án Tetris Game với STM32]
+## Demo
+
+![Game](image/start.jpg)
 
 ## TÁC GIẢ
-
 - Tên nhóm:bốn anh tài
 - Thành viên trong nhóm
 
@@ -31,8 +33,6 @@ __Sản phẩm:__
 - Module rung để thực hiện việc báo hiệu khi có hàng đã được ăn
 - 4 nút nhấn đơn phục vụ cho việc điều khiển khi chơi game
 
-## SO ĐỒ SCHEMATIC
-![image](./?.png)
 
 
 ### TÍCH HỢP HỆ THỐNG
@@ -92,7 +92,6 @@ __Sản phẩm:__
     */
     void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) { //Mã định danh của chân GPIO gây ra ngắt
         static uint32_t last_time = 0;
-
         if(GPIO_Pin == GPIO_PIN_0){
             // Đây là nút đặc biệt → phát nhạc qua DFPlayer
             DF_SendCommand(0x19, 0x00, 0x00);
@@ -102,7 +101,6 @@ __Sản phẩm:__
             // chống rung phím trong 200ms
             if(HAL_GetTick() - last_time < 200) return;
             last_time = HAL_GetTick();
-
             // xác định nút nào đang được bấm
             char res = 0;
             switch (GPIO_Pin)
@@ -122,30 +120,19 @@ __Sản phẩm:__
                 default:
                     return;
             }
-
-            last_button = res;
-
-            // Đánh thức MovingTask để xử lý nút bấm
-            osThreadFlagsSet(movingTaskHandle, 0x01);
+...
         }
     }
   ```
 *__[Screen1View.cpp](TouchGFX/gui/src/screen1_screen/Screen1View.cpp)__*
 * ```C
-   /**
-     Start screen, chỉ hiển thị điểm và chờ người chơi bắt đầu.
-    */
-    void Screen1View::handleTickEvent() {
-        tickCounter += 1;
-        //hiển thị điểm cao nhất đạt được
-        Unicode::snprintf(highestScoreBuffer, HIGHESTSCORE_SIZE, "%d", presenter->getHighestScore());
-        highestScore.invalidate();
-    }
+   /**  Hiển thị điểm cao nhất người dùng đạt đ
+
   ```
 *__[Screen2View.cpp](TouchGFX/gui/src/screen2_screen/Screen2View.cpp)__*
 * ```C
   /**
-   Các hàm callback xử lý khi chọn level cho game
+   Các hàm xử lý chọn chế độ cho người dùng có 3 mức độ dễ bình thường và khó
    */
   void Screen2View::easyBtn();
   void Screen2View::mediumBtn();
@@ -170,94 +157,67 @@ __Sản phẩm:__
   ```
 * ```C
    /**
-    Xử lý game sau mỗi tick event (tương đương vòng loop để xử lý game)
+    Xử lý giao diện bộ khung hiển thị game với tọa độ lưới định danh bởi 5 giá trị
     */
-    void Screen3View::handleTickEvent() {
-            if (++tickCount % level == 0) {
-            if(engine.isGameOver()) {	//kiểm tra gameover
+    Screen3View::Screen3View() {
+	int gridOffsetX = 29;   // tọa độ X góc trên-trái của khung lưới
+	int gridOffsetY = 46;   // tọa độ Y góc trên-trái của khung lưới
+	int cellSize = 12; // kích thước mỗi ô 
+	gamePaused = false;
+	for (int y = 0; y < GRID_HEIGHT; y++) {
+		for (int x = 0; x < GRID_WIDTH; x++) {
+			int px = gridOffsetX + x * cellSize;
+			int py = gridOffsetY + y * cellSize;
+			....
+		}
+	}
+    ....
+	//khởi tạo lưới để hiện thị next block. Hiển thị hình ảnh các khối tiếp theo để người dùng đoán trước lựa chọn
+	int previewX = 177;
+	int previewY = 60;
+	for (int y = 0; y < 4; y++) {
+		for (int x = 0; x < 4; x++) {
+			...
+		}
+	}
+	...
+	// Đưa ra các mức độ chơi để người dùng chơi
+	const char *levelName = "Easy";
+	...
+	}
+}
 
-                //set các ô trên lưới là ko hiển thị nếu gameover
-                ...
-
-                //set các ô trên pre boxes là ko hiển thị nếu gameover
-                ...
-                
-                presenter->setHighestScore(engine.getScore());	//cập nhật highest score
-                return;
-            }
-
-            //kiểm tra queue -> có phần tử -> có tín hiệu nút bấm điều khiển
-            ...
-            //update hiển thị
-            ...
-
-            if(engine.getTakeScore()){	//nếu ghi được điểm -> tạo tiếng beep - beep
-                ...
-            }
-            if(engine.isGameOver() && musicGameOver == false){ //game over -> bật nhạc game over
-                ...
-            }
-            //vẽ lại lưới chính
-            drawGrid();
-
-            //vẽ lại lưới cho pre block
-            drawPreview();
-        }
-    }
-  ```
-* ```C
-   /**
-    Vẽ pre block
-    */
-    void Screen3View::drawPreview() {
-        // Lấy khối tiếp theo
-        ...
-        engine.getNextBlock(nextBlock, nextBlockSize, nextBlockColor);
-
-        // Đặt lại previewBox trước về trạng thái trong suốt
-       ...
-
-        // Vẽ preview block
-        ...
-   }
-  ```
-* ```C
-   /**
-    Vẽ lưới game
-    */
-    void Screen3View::drawGrid(){
-        const auto& block = engine.getCurrentBlock();
-        int currX = engine.getCurrX();
-        int currY = engine.getCurrY();
-
-        //Vẽ lưới chính
-        ...
-
-        // Vẽ block đang rơi
-        ...
-
-        //lấy bound của block (hình chữ nhật nhỏ nhất mà chứa được toàn bộ block)
-        ...
-    }
+// Vẽ block đang rơi
+void Screen3View::drawGrid() {
+//    const auto& grid = engine.getGrid();
+	const auto &block = engine.getCurrentBlock();
+	int currX = engine.getCurrX();
+	int currY = engine.getCurrY();
+	// --- VẼ LƯỚI CHÍNH ---
+	for (int y = 0; y < GRID_HEIGHT; ++y) {
+		for (int x = 0; x < GRID_WIDTH; ++x) {
+			...
+	}
+	// Vẽ block đang rơi
+	int currType = engine.getCurrentBlockType();  // Lấy ID loại gạch (0 đến 10)
+	uint16_t blockColor = engine.getCurrentBlockColor(); // Lấy mã màu thực tế (0xF800...)
+	uint8_t r, g, b;
+	convertRGB565ToRGB888(blockColor, r, g, b); // Truyền đúng mã màu vào hàm convert
+	...
+	// hàm tạm dừng trò chơi
+	void Screen3View::pauseBtn() {
+	gamePaused = flexButton2.getPressed();
+}
+}
   ```
 *__[TetrisEngine.hpp](Middlewares/Third_Party/FreeRTOS/Source/include/TetrisEngine.hpp)__*
 * ```C
+// Khai báo các khối cơ bản và các khối mở rộng như đá bom...
+const int Tetrominoes[11][4][4] = {} 
+
+// Hàm khai báo màu cho từng khối
+const uint16_t ColorPallette[11] = {}
   /**
-   Thuộc tính của TetrisEngine
-   */
-  Grid grid;              //~ int grid[10][20] -> đánh dấu các ô trên lưới
-  BlockMatrix currBlock;  //~ int currBlock[4][4] -> đánh dấu các ô cho block hiện tại
-  int currX, currY;       //vị trí của block
-  int blockSize;          //size của block
-  bool gameOver;          //trạng thái game
-  int score;              //điểm
-  bool takeScore;         //ghi điểm?
-  int nextBlockSize;      //size khối tiếp theo
-  int nextBlockId;        //id khối tiếp theo
-  BlockMatrix nextBlock;	//khối tiếp theo
-  int currBlockColor;     //màu khối hiện tại
-  int nextBlockColor;     //màu khối tiếp theo
-  ```
 *__[TetrisEngine.cpp](STM32CubeIDE/Application/User/TetrisEngine.cpp)__*
 * ```C
    /**
@@ -266,27 +226,20 @@ __Sản phẩm:__
     void TetrisEngine::init() {
         //Khởi tạo giá trị ban đầu cho grid
         ...
-
         // Dùng cho tạo khối tiếp theo
         ...
-
         //random khối mới
         spawnBlock();
     }
   ```
 * ```C
    /**
-    Tạo khối mới và color cho khối
+    Tạo khối mới và color cho khối các khối có khả năng rơi ra là 85% và 15% là đạo cụ đặc biệt
     */
     void TetrisEngine::generateNextBlock() {
         nextBlockId = osKernelGetTickCount() % 7;	//lấy next box (7 loại) dựa trên tick hệ thống
-        nextBlockSize = (nextBlockId == 0) ? 4 : 3;
-        nextBlockSize = (nextBlockId == 1) ? 2 : nextBlockSize;
-        nextBlockColor = osKernelGetTickCount() % 7;
-        for (int i = 0; i < 4; ++i)
-            for (int j = 0; j < 4; ++j)
-                nextBlock[i][j] = Tetrominoes[nextBlockId][i][j]; //đánh dấu các ô có thể hiển thị cho next block
-    }
+        
+        ...
   ```
 * ```C
    /**
@@ -301,22 +254,57 @@ __Sản phẩm:__
         color = ColorPallette[nextBlockColor];
     }
   ```  
+  void TetrisEngine::lockBlock() {
+    //  Kiểm tra xem có phải là đạo cụ đặc biệt không (Bom, Clear Col, Clear Row)
+    if (currBlockColor >= 7 && currBlockColor <= 9) {
+        ...
+        // Thực thi hiệu ứng
+        if (currBlockColor == 7) { // 7: Bom nổ 3x3
+            for...
+                        grid[ny][nx] = 0; // Clear ô
+                    }
+                }
+            }
+
+        }
+        else if (currBlockColor == 8) { // 8: Clear cột
+            for (int y = 0; y < GRID_HEIGHT; y++) {
+                grid[y][itemX] = 0;
+            }
+
+        }
+        else if (currBlockColor == 9) { // 9: Clear hàng
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                grid[itemY][x] = 0;
+            }
+
+        }
+        takeScore = true; // Kích hoạt còi báo hiệu ăn điểm
+        score += point;
+    }
+    else {
+        // 2. Nếu là khối bình thường hoặc Khối Đá (10) thì cố định vào Grid
+        for (int i = 0; i < blockSize; ++i) {
+            for (int j = 0; j < blockSize; ++j) {
+                ...
+                    if (gy >= 0 && gy < GRID_HEIGHT && gx >= 0 && gx < GRID_WIDTH) {
+                        grid[gy][gx] = currBlockColor + 1; // +1 để khác 0
+                    }
+                }
+            }
+        }
+    }
+
+    // --- CHU TRÌNH RỤNG VÀ QUÉT HÀNG CHUẨN ---
+            bool actionHappened;
+            ...
+}
 * ```C
    /**
    	Gán khối mới cho khối hiện tại
     */
     void TetrisEngine::spawnBlock() {
-        if (nextBlockId == -1) generateNextBlock(); // Spawn đầu
-        for (int i = 0; i < 4; ++i)
-            for (int j = 0; j < 4; ++j)
-                currBlock[i][j] = nextBlock[i][j];	//gán nextBlock cho currBlock
-        blockSize = nextBlockSize;
-        currBlockColor = nextBlockColor;
-
-        //bắt đầu rơi tại vị trí giữa trên cùng
-        currX = (GRID_WIDTH - blockSize) / 2;
-        currY = 0;
-        generateNextBlock(); // Tạo khối tiếp theo
+        ...
     }
   ```
 * ```C
@@ -325,11 +313,7 @@ __Sản phẩm:__
     @param BlockMatrix& thể hiện khối 4x4 cần xoay
     */
     void TetrisEngine::rotateMatrix(BlockMatrix& mat) {
-        BlockMatrix temp = {};
-        for (int i = 0; i < blockSize; ++i)
-            for (int j = 0; j < blockSize; ++j)
-                temp[j][blockSize - 1 - i] = mat[i][j];
-        mat = temp;
+        ...
     }
   ```
 * ```C
@@ -341,16 +325,9 @@ __Sản phẩm:__
     @param	minY: int& lưu tọa độ y nhỏ nhất
     @param	maxY: int& lưu tọa độ y lớn nhất
     */
+    // Tìm vùng bao quanh một khối teris
     void TetrisEngine::getBlockBounds(const BlockMatrix& block, int& minX, int& maxX, int& minY, int& maxY) {
-        minX = blockSize; maxX = 0; minY = blockSize; maxY = 0;
-        for (int i = 0; i < blockSize; ++i)
-            for (int j = 0; j < blockSize; ++j)
-                if (block[i][j]) {
-                    if (j < minX) minX = j;
-                    if (j > maxX) maxX = j;
-                    if (i < minY) minY = i;
-                    if (i > maxY) maxY = i;
-                }
+       ...
     }
   ```
 * ```C
@@ -400,7 +377,7 @@ __Sản phẩm:__
   ```
 * ```C
    /**
-    Xóa line nếu cả hàng đã full
+    Xóa line nếu cả hàng đã full và tính điểm
     */
     void TetrisEngine::clearLines() {
         //kiểm tra các hàng từ dưới lên trên
@@ -425,35 +402,23 @@ __Sản phẩm:__
     Check va chạm + khóa khối nếu được
     */
     void TetrisEngine::update() {
-        if(!gameOver){
-            if (!checkCollision(currX, currY + 1, currBlock))
-                currY++;
-            else{
-                lockBlock();
-                for(int i = 0; i < GRID_WIDTH; i++)
-                    if(grid[0][i]) gameOver = true; //hàng trên cùng có khối -> game over
-            }
-        }
+       ...
     }
   ```
 * ```C
    /**
-    Di chuyển trái
+    Di chuyển block sang trái
     */
     void TetrisEngine::moveLeft() {
-        if(gameOver) return;
-        //kiểm tra trước khi di chuyển
-        if (!checkCollision(currX - 1, currY, currBlock)) currX--;
+        ...
     }
   ```
 * ```C
    /**
-    Di chuyển phải
+    Di chuyển block sang phải
     */
     void TetrisEngine::moveRight() {
-        if(gameOver) return;
-        //kiểm tra trước khi di chuyển
-        if (!checkCollision(currX + 1, currY, currBlock)) currX++;
+        ...
     }
   ```
 * ```C
@@ -469,15 +434,10 @@ __Sản phẩm:__
   ```
 * ```C
    /**
-    Xoay block
+    Xoay block sang phải 1 lần
     */
     void TetrisEngine::rotate() {
-        if(gameOver) return;
-        BlockMatrix temp = currBlock;
-        rotateMatrix(temp);
-        //kiểm tra trước khi di chuyển
-        if (!checkCollision(currX, currY, temp))
-            currBlock = temp;
+       ...
     }
   ```
 * ```C
@@ -504,6 +464,6 @@ __Sản phẩm:__
 
 ### KẾT QUẢ
 
-- __[Game Over](link)__
-- __[Xóa 1 hàng và ghi điểm](link)__
-- __[Menu](link)__
+- __[Game Over](image/gameover.jpg)__
+- __[Giao diện lúc chơi trò chơi](image/test.jpg)__
+- __[Quá trình chơi trò chơi](image/finalgame.mp4)__
