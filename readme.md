@@ -205,7 +205,6 @@ void Screen3View::drawGrid() {
 }
 }
   ```
-
   /**
 *__[TetrisEngine.cpp](STM32CubeIDE/Application/User/TetrisEngine.cpp)__*
 * ```C
