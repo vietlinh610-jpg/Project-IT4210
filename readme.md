@@ -456,6 +456,10 @@ void Screen3View::drawGrid() {
 
 ![Giao diện trò chơi](image/test.jpg)
 
+## Menu cấp độ
+
+![Giao diện cấp độ](image/menu.jpg)
+
 ## Quá trình thực hiện
 
 - __[Quá trình chơi trò chơi](image/finalgame.mp4)__
