@@ -35,15 +35,16 @@ __Sản phẩm:__
 ## SƠ ĐỒ SCHEMATIC
 
 |STM32F429|phím nhấn|mô tơ rung|
-|--|--|
-|3V|VCC| |
-|5V| |VCC|
-|GND| |GND|
-|PC3| |in|
-|PG2|rotate| |
-|PG3|down| |
-|PB12|left| |
-|PB13|right| |
+  |--|--|
+  |3V|VCC| |
+  |5V| |VCC|
+  |GND| |GND|
+  |PC3| |in|
+  |PG2|rotate| |
+  |PG3|down| |
+  |PB12|left| |
+  |PB13|right| |
+  
 ### TÍCH HỢP HỆ THỐNG
 
 * Phần cứng
