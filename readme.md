@@ -13,16 +13,23 @@ __Sản phẩm:__
 
 ## TÁC GIẢ
 
-- Tên nhóm:
+- Tên nhóm:bốn anh tài
 - Thành viên trong nhóm
-  |STT|Họ tên|MSSV|Công việc|
+
+|STT|Họ tên|MSSV|Công việc|
+  |--|--|--|--|
+  | 1 | Trịnh Hải Bình | 20235376 | Thiết kế logic game, thiết kế sơ bộ giao diện, bước đầu thiết kế game |
+  | 2 | Lê Công Dũng | 20235300 | Thiết kế giao diện game, xử lý các ngắt, flash |
+  | 3 | Trần Viết Linh | 20235364 | Phát triển logic tạo khối ngẫu nhiên, di chuyển khối, đổi màu khối |
+  | 4 | Đào Quốc Đại | 20235290 | Xử lý ngắt, xử lý chế độ rung, logic tích điểm, phát triển logic game |
   
 
 ## MÔI TRƯỜNG HOẠT ĐỘNG
 
-- STM32F429ZIT6
-- Bộ kit STM32F429ZIT6 tích hợp cảm biến, màn hình cảm ứng
-- Module dfplayer mini cho việc phát âm thanh
+- Vi điều khiển STM32F429ZIT6
+- Bộ kit STM32F429ZIT6 được tích hợp cảm biến, màn hình cảm ứng
+- Module rung để thực hiện việc báo hiệu khi có hàng đã được ăn
+- 4 nút nhấn đơn phục vụ cho việc điều khiển khi chơi game
 
 ## SO ĐỒ SCHEMATIC
 ![image](./?.png)
@@ -35,15 +42,15 @@ __Sản phẩm:__
   |--|--|
   |STM32F429ZIT6|Bo mạch điều khiển chính, xử lý toàn bộ logic game và giao tiếp phần cứng|
   |Màn hình LCD|Hiển thị giao diện trò chơi Tetris và nhận thao tác Start qua cảm ứng|
-  |4 nút nhấn|Điều khiển trò chơi (di chuyển khối Tetris, xoay, thả nhanh)|
-  |Breadboard + dây nối	|Tạo mạch kết nối phần cứng giữa các thiết bị|
+  |4 nút nhấn|Cung cấp tín hiệu điều khiển trò chơi (di chuyển khối Tetris, xoay, thả nhanh)|
+  |Breadboard + dây nối	|Dùng để tạo mạch kết nối phần cứng giữa các thiết bị ngoại vi|
 
 * Phần mềm
 |Thành phần|Vai trò|
   |--|--|
-  |Firmware chính(C/C++)|Điều khiển game logic, xử lí giao tiếp với nút|
-  |TouchGFX|Thiết kế giao diện game|
-  |STM32CubeIDE|Môi trường phát triển, biên dịch và nạp chương trình|
+  |Firmware chính(C/C++)|Xử lý logic cốt lõi của game và điều kiển việc giao tiếp với các nút bấm|
+  |TouchGFX|Nền tảng được sử dụng để thiết kế giao diện đồ họa cho game|
+  |STM32CubeIDE|Đóng vai trò là môi trường phát triển, biên dịch và nạp chương trình|
 
 ### ĐẶC TẢ HÀM
 
