@@ -446,16 +446,16 @@ void Screen3View::drawGrid() {
         return ColorPallette[grid[y][x] - 1];
     }
   ```
-
 ### KẾT QUẢ
+
 ## Game Over
 
 ![Game Over](image/gameover.jpg)
 
-##Giao diện trò chơi
+## Giao diện trò chơi
 
-![Giao diện](image/test.jpg)
+![Giao diện trò chơi](image/test.jpg)
 
-##Quá trình thực hiện
+## Quá trình thực hiện
 
-![Quá trình](image/finalgame.gif)
+- __[Quá trình chơi trò chơi](image/finalgame.mp4)__
