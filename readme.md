@@ -208,10 +208,6 @@ void Screen3View::drawGrid() {
   /**
 *__[TetrisEngine.cpp](STM32CubeIDE/Application/User/TetrisEngine.cpp)__*
 * ```C
-// Khai báo các khối cơ bản và các khối mở rộng như đá bom...
-const int Tetrominoes[11][4][4] = {}
-// Hàm khai báo màu cho từng khối
-const uint16_t ColorPallette[11] = {}
    /**
     Khởi tạo giá trị ban đầu cho các thuộc tính, tạo khối mới
     */
