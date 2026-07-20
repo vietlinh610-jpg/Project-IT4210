@@ -9,7 +9,6 @@ __Sản phẩm:__
 4. Chia cấp độ trò chơi với 3 mức easy, medium, hard mỗi cấp độ có tốc độ khác nhau và mức độ điểm khác nhau
 5. Hiển thị điểm số, ghi điểm số cao nhất vào flash
 
-![Ảnh minh họa dự án Tetris Game với STM32]
 ## Demo
 
 ![Game](image/start.jpg)
@@ -33,8 +32,18 @@ __Sản phẩm:__
 - Module rung để thực hiện việc báo hiệu khi có hàng đã được ăn
 - 4 nút nhấn đơn phục vụ cho việc điều khiển khi chơi game
 
+## SƠ ĐỒ SCHEMATIC
 
-
+|STM32F429|phím nhấn|mô tơ rung|
+|--|--|
+|3V|VCC| |
+|5V| |VCC|
+|GND| |GND|
+|PC3| |in|
+|PG2|rotate| |
+|PG3|down| |
+|PB12|left| |
+|PB13|right| |
 ### TÍCH HỢP HỆ THỐNG
 
 * Phần cứng
@@ -43,6 +52,7 @@ __Sản phẩm:__
   |STM32F429ZIT6|Bo mạch điều khiển chính, xử lý toàn bộ logic game và giao tiếp phần cứng|
   |Màn hình LCD|Hiển thị giao diện trò chơi Tetris và nhận thao tác Start qua cảm ứng|
   |4 nút nhấn|Cung cấp tín hiệu điều khiển trò chơi (di chuyển khối Tetris, xoay, thả nhanh)|
+  |mô tơ rung|Cung cấp thông báo khi người chơi có điểm|
   |Breadboard + dây nối	|Dùng để tạo mạch kết nối phần cứng giữa các thiết bị ngoại vi|
 
 * Phần mềm
@@ -205,7 +215,6 @@ void Screen3View::drawGrid() {
 }
 }
   ```
-  /**
 *__[TetrisEngine.cpp](STM32CubeIDE/Application/User/TetrisEngine.cpp)__*
 * ```C
    /**
