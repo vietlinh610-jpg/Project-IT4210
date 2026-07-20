@@ -449,8 +449,13 @@ void Screen3View::drawGrid() {
 
 ### KẾT QUẢ
 ## Game Over
+
 ![Game Over](image/gameover.jpg)
+
 ##Giao diện trò chơi
+
 ![Giao diện](image/test.jpg)
+
 ##Quá trình thực hiện
-![Quá trình](image/finalgame.mp4)
+
+![Quá trình](image/finalgame.gif)
