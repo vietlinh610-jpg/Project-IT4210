@@ -35,7 +35,7 @@ __Sản phẩm:__
 ## SƠ ĐỒ SCHEMATIC
 
 |STM32F429|phím nhấn|mô tơ rung|
-  |--|--|
+  |--|--|--|
   |3V|VCC| |
   |5V| |VCC|
   |GND| |GND|
