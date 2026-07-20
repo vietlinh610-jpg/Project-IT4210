@@ -186,7 +186,8 @@ __Sản phẩm:__
 	...
 	}
 }
-
+```
+* ```C
 // Vẽ block đang rơi
 void Screen3View::drawGrid() {
 //    const auto& grid = engine.getGrid();
@@ -254,10 +255,10 @@ const uint16_t ColorPallette[11] = {}
         color = ColorPallette[nextBlockColor];
     }
   ```  
+* ```C
   void TetrisEngine::lockBlock() {
     //  Kiểm tra xem có phải là đạo cụ đặc biệt không (Bom, Clear Col, Clear Row)
     if (currBlockColor >= 7 && currBlockColor <= 9) {
-        ...
         // Thực thi hiệu ứng
         if (currBlockColor == 7) { // 7: Bom nổ 3x3
             for...
@@ -265,13 +266,11 @@ const uint16_t ColorPallette[11] = {}
                     }
                 }
             }
-
         }
         else if (currBlockColor == 8) { // 8: Clear cột
             for (int y = 0; y < GRID_HEIGHT; y++) {
                 grid[y][itemX] = 0;
             }
-
         }
         else if (currBlockColor == 9) { // 9: Clear hàng
             for (int x = 0; x < GRID_WIDTH; x++) {
@@ -282,8 +281,7 @@ const uint16_t ColorPallette[11] = {}
         takeScore = true; // Kích hoạt còi báo hiệu ăn điểm
         score += point;
     }
-    else {
-        // 2. Nếu là khối bình thường hoặc Khối Đá (10) thì cố định vào Grid
+    else {// 2. Nếu là khối bình thường hoặc Khối Đá (10) thì cố định vào Grid
         for (int i = 0; i < blockSize; ++i) {
             for (int j = 0; j < blockSize; ++j) {
                 ...
@@ -294,11 +292,11 @@ const uint16_t ColorPallette[11] = {}
             }
         }
     }
-
     // --- CHU TRÌNH RỤNG VÀ QUÉT HÀNG CHUẨN ---
             bool actionHappened;
             ...
 }
+```
 * ```C
    /**
    	Gán khối mới cho khối hiện tại
