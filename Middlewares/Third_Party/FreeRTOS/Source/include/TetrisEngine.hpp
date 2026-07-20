@@ -41,10 +41,12 @@ public:
     void setTakeScore(bool param) { takeScore = param; }
 	bool getTakeScore() const { return takeScore; }
 	void generateNextBlock();
-	void getNextBlock(BlockMatrix& block, int& size, uint16_t& color) const;
+	void getNextBlock(BlockMatrix& block, int& size, uint16_t& color, int& id) const;
 	bool isGameOver() const { return gameOver; }
 	uint16_t getCurrentBlockColor() const;
 	uint16_t getGridColor(int x, int y) const;
+	int getCurrentBlockType() const { return currBlockColor; }
+	void selectLevel(char res);
 
 private:
 	Grid grid;					//~ int grid[20][10] -> đánh dấu các ô trên lưới
@@ -59,7 +61,8 @@ private:
 	BlockMatrix nextBlock;		//khối tiếp theo
 	int currBlockColor;
 	int nextBlockColor;
-
+	int point;
+	bool applyGravity();
 	void spawnBlock();
 	bool checkCollision(int newX, int newY, const BlockMatrix& block);
 	void lockBlock();

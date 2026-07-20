@@ -555,14 +555,34 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_easy.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_gameover.cpp</name>
+			<name>Application/User/generated/image_gameover1.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_gameover.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_gameover1.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_hard.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_hard.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_icon_bomb.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_icon_bomb.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_icon_lightning_h.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_icon_lightning_h.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_icon_lightning_v.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_icon_lightning_v.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_icon_stone.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_icon_stone.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_medium.cpp</name>

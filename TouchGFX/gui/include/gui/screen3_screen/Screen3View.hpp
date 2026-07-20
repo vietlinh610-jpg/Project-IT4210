@@ -4,6 +4,8 @@
 #include <gui_generated/screen3_screen/Screen3ViewBase.hpp>
 #include <gui/screen3_screen/Screen3Presenter.hpp>
 #include "TetrisEngine.hpp"
+#include <touchgfx/widgets/Image.hpp>
+#include <BitmapDatabase.hpp>
 
 class Screen3View : public Screen3ViewBase
 {
@@ -20,6 +22,8 @@ public:
     void drawPreview();	//vẽ pre block
 
 protected:
+    touchgfx::Image itemIcons[GRID_HEIGHT][GRID_WIDTH];
+    touchgfx::Image previewItemIcons[4][4];
     TetrisEngine engine;				//game engine
     BoxWithBorder colBoxes[20][10];		//lưới box chính hiển thị
     BoxWithBorder previewBoxes[4][4];	//next box

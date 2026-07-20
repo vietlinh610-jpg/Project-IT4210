@@ -1,5 +1,5 @@
 Application/User/generated/Screen5ViewBase.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/screen5_screen/Screen5ViewBase.cpp \
+ C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/screen5_screen/Screen5ViewBase.cpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/screen5_screen/Screen5ViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \

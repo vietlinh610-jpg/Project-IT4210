@@ -70,8 +70,7 @@ void Error_Handler(void);
 #define SPI5_NCS_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
-void VibrateTask(void *param);
-void DF_SendCommand(uint8_t cmd, uint8_t param1, uint8_t param2);
+void VibrateTask(void *argument);
 void GameOverTask(void *param);
 uint32_t Flash_Write_Data (uint32_t StartPageAddress, uint32_t *Data, uint16_t numberofwords);
 void Flash_Read_Data (uint32_t StartPageAddress, uint32_t *RxBuf, uint16_t numberofwords);

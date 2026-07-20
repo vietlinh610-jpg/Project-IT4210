@@ -6,7 +6,6 @@ extern uint8_t currScreen;
 Screen1View::Screen1View()
 {
 	currScreen = 1;
-    DF_SendCommand(0x0F, 0x02, 0x02);
 }
 
 void Screen1View::setupScreen()

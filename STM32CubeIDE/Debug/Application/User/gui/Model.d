@@ -1,5 +1,5 @@
 Application/User/gui/Model.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/model/Model.cpp \
+ C:/Projects/Tetris/TouchGFX/gui/src/model/Model.cpp \
  ../../TouchGFX/gui/include/gui/model/Model.hpp \
  ../../TouchGFX/gui/include/gui/model/ModelListener.hpp \
  ../../Core/Inc/main.h \

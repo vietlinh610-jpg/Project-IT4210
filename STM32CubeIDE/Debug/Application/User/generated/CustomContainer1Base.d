@@ -1,5 +1,5 @@
 Application/User/generated/CustomContainer1Base.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp \
+ C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/containers/CustomContainer1Base.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \

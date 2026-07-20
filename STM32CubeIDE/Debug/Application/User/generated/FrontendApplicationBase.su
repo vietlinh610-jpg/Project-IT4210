@@ -29,22 +29,22 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/CoverTransition.hpp:76:18:void touchgfx::CoverTransition<templateDirection>::handleTickEvent() [with touchgfx::Direction templateDirection = touchgfx::EAST]	24	static
 ../../Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp:59:18:virtual void touchgfx::MVPApplication::handlePendingScreenTransition()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/HAL.hpp:310:17:static touchgfx::LCD& touchgfx::HAL::lcd()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:25:1:FrontendApplicationBase::FrontendApplicationBase(Model&, FrontendHeap&)	24	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:44:6:void FrontendApplicationBase::gotoScreen1ScreenNoTransition()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:55:6:void FrontendApplicationBase::gotoScreen1ScreenWipeTransitionWest()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:66:6:void FrontendApplicationBase::gotoScreen1ScreenCoverTransitionEast()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:79:6:void FrontendApplicationBase::gotoScreen2ScreenCoverTransitionEast()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:92:6:void FrontendApplicationBase::gotoScreen3ScreenCoverTransitionEast()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:103:6:void FrontendApplicationBase::gotoScreen3ScreenNoTransition()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:116:6:void FrontendApplicationBase::gotoScreen4ScreenNoTransition()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:25:1:FrontendApplicationBase::FrontendApplicationBase(Model&, FrontendHeap&)	24	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:44:6:void FrontendApplicationBase::gotoScreen1ScreenNoTransition()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:55:6:void FrontendApplicationBase::gotoScreen1ScreenWipeTransitionWest()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:66:6:void FrontendApplicationBase::gotoScreen1ScreenCoverTransitionEast()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:79:6:void FrontendApplicationBase::gotoScreen2ScreenCoverTransitionEast()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:92:6:void FrontendApplicationBase::gotoScreen3ScreenCoverTransitionEast()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:103:6:void FrontendApplicationBase::gotoScreen3ScreenNoTransition()	0	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:116:6:void FrontendApplicationBase::gotoScreen4ScreenNoTransition()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/common/AbstractPartition.hpp:135:8:T& touchgfx::AbstractPartition::at(uint16_t) [with T = touchgfx::NoTransition]	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:122:6:void FrontendApplicationBase::gotoScreen4ScreenNoTransitionImpl()	40	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:109:6:void FrontendApplicationBase::gotoScreen3ScreenNoTransitionImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:122:6:void FrontendApplicationBase::gotoScreen4ScreenNoTransitionImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:109:6:void FrontendApplicationBase::gotoScreen3ScreenNoTransitionImpl()	40	static
 ../../Middlewares/ST/touchgfx/framework/include/common/AbstractPartition.hpp:135:8:T& touchgfx::AbstractPartition::at(uint16_t) [with T = Screen1View]	0	static
 ../../Middlewares/ST/touchgfx/framework/include/common/AbstractPartition.hpp:135:8:T& touchgfx::AbstractPartition::at(uint16_t) [with T = Screen1Presenter]	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:61:6:void FrontendApplicationBase::gotoScreen1ScreenWipeTransitionWestImpl()	40	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:50:6:void FrontendApplicationBase::gotoScreen1ScreenNoTransitionImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:61:6:void FrontendApplicationBase::gotoScreen1ScreenWipeTransitionWestImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:50:6:void FrontendApplicationBase::gotoScreen1ScreenNoTransitionImpl()	40	static
 ../../Middlewares/ST/touchgfx/framework/include/common/AbstractPartition.hpp:135:8:T& touchgfx::AbstractPartition::at(uint16_t) [with T = touchgfx::CoverTransition<touchgfx::EAST>]	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:98:6:void FrontendApplicationBase::gotoScreen3ScreenCoverTransitionEastImpl()	40	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:85:6:void FrontendApplicationBase::gotoScreen2ScreenCoverTransitionEastImpl()	40	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:72:6:void FrontendApplicationBase::gotoScreen1ScreenCoverTransitionEastImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:98:6:void FrontendApplicationBase::gotoScreen3ScreenCoverTransitionEastImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:85:6:void FrontendApplicationBase::gotoScreen2ScreenCoverTransitionEastImpl()	40	static
+C:/Projects/Tetris/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp:72:6:void FrontendApplicationBase::gotoScreen1ScreenCoverTransitionEastImpl()	40	static

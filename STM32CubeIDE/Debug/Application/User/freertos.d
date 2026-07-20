@@ -1,5 +1,4 @@
-Application/User/freertos.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/Core/Src/freertos.c \
+Application/User/freertos.o: C:/Projects/Tetris/Core/Src/freertos.c \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../../Core/Inc/FreeRTOSConfig.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \

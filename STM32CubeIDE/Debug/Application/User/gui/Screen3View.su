@@ -12,16 +12,17 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:703:18:virtual void touchgfx::Drawable::setupDrawChain(const touchgfx::Rect&, touchgfx::Drawable**)	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:97:6:virtual void Screen3View::tearDownScreen()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:247:6:virtual void Screen3View::pauseBtn()	0	static
-../../TouchGFX/gui/include/gui/screen3_screen/Screen3View.hpp:12:13:Screen3View::~Screen3View()	16	static
-../../TouchGFX/gui/include/gui/screen3_screen/Screen3View.hpp:12:13:virtual Screen3View::~Screen3View()	8	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:120:6:virtual void Screen3View::tearDownScreen()	0	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:346:6:virtual void Screen3View::pauseBtn()	0	static
+../../TouchGFX/gui/include/gui/screen3_screen/Screen3View.hpp:14:13:Screen3View::~Screen3View()	16	static
+../../TouchGFX/gui/include/gui/screen3_screen/Screen3View.hpp:14:13:virtual Screen3View::~Screen3View()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:121:18:virtual void touchgfx::Drawable::invalidateContent() const	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:45:18:virtual void touchgfx::Widget::getLastChild(int16_t, int16_t, touchgfx::Drawable**)	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:233:10:void touchgfx::Drawable::setPosition(int16_t, int16_t, int16_t, int16_t)	24	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp:33:5:touchgfx::Box::Box()	0	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:161:6:void Screen3View::drawGrid()	72	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:211:6:void Screen3View::drawPreview()	128	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:24:1:Screen3View::Screen3View()	72	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:87:6:virtual void Screen3View::setupScreen()	8	static
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:107:6:virtual void Screen3View::handleTickEvent()	32	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp:50:5:touchgfx::Image::Image(const touchgfx::Bitmap&)	8	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:186:6:void Screen3View::drawGrid()	96	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:286:6:void Screen3View::drawPreview()	160	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:27:1:Screen3View::Screen3View()	88	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:111:6:virtual void Screen3View::setupScreen()	8	static
+C:/Projects/Tetris/TouchGFX/gui/src/screen3_screen/Screen3View.cpp:128:6:virtual void Screen3View::handleTickEvent()	32	static

@@ -1,5 +1,5 @@
 Application/User/generated/CachedFont.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/generated/fonts/src/CachedFont.cpp \
+ C:/Projects/Tetris/TouchGFX/generated/fonts/src/CachedFont.cpp \
  ../../TouchGFX/generated/fonts/include/fonts/CachedFont.hpp \
  ../../TouchGFX/generated/fonts/include/fonts/FontCache.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Font.hpp \

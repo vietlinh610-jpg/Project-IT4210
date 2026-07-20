@@ -282,6 +282,15 @@
         "Components": [
           {
             "Type": "Image",
+            "Name": "image2",
+            "X": -32,
+            "Y": 69,
+            "Width": 240,
+            "Height": 193,
+            "RelativeFilename": "gameover1.png"
+          },
+          {
+            "Type": "Image",
             "Name": "image1",
             "Width": 240,
             "Height": 321,
@@ -356,15 +365,6 @@
               "UseBuffer": true,
               "BufferSize": 10
             }
-          },
-          {
-            "Type": "Image",
-            "Name": "image2",
-            "X": -29,
-            "Y": 74,
-            "Width": 240,
-            "Height": 193,
-            "RelativeFilename": "gameover.png"
           },
           {
             "Type": "TextArea",

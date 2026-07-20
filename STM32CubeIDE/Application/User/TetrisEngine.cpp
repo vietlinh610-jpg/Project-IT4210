@@ -8,304 +8,428 @@
 #include "TetrisEngine.hpp"
 #include "cmsis_os.h"
 
-namespace {
-    const int Tetrominoes[7][4][4] = {
-        // I
-        {{0,0,0,0}, {1,1,1,1}, {0,0,0,0}, {0,0,0,0}},
-        // O
-        {{1,1,0,0}, {1,1,0,0}, {0,0,0,0}, {0,0,0,0}},
-        // T
-        {{0,1,0,0}, {1,1,1,0}, {0,0,0,0}, {0,0,0,0}},
-        // S
-        {{0,1,1,0}, {1,1,0,0}, {0,0,0,0}, {0,0,0,0}},
-        // Z
-        {{1,1,0,0}, {0,1,1,0}, {0,0,0,0}, {0,0,0,0}},
-        // J
-        {{1,0,0,0}, {1,1,1,0}, {0,0,0,0}, {0,0,0,0}},
-        // L
-        {{0,0,1,0}, {1,1,1,0}, {0,0,0,0}, {0,0,0,0}},
-    };
+// Macro chuyển đổi RGB888 sang RGB565 chuẩn cho STM32
+#define RGB565(r, g, b) __builtin_bswap16((uint16_t)(((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)))
 
-    // Thêm màu cho khối
-    const uint16_t ColorPallette[7] = {
-		0xF800, // Red
-		0x07E0, // Green
-		0x001F, // Blue
-		0xFC00,
-		0xFFE0, // Yellow
-		0xF81F, // Magenta
-		0xFFFF, // White
-    };
+namespace {
+const int Tetrominoes[11][4][4] = {
+        // --- 7 KHỐI CƠ BẢN ---
+        { { 0, 0, 0, 0 }, { 1, 1, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 0: I
+        { { 1, 1, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 1: O
+        { { 0, 1, 0, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 2: T
+        { { 0, 1, 1, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 3: S
+        { { 1, 1, 0, 0 }, { 0, 1, 1, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 4: Z
+        { { 1, 0, 0, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 5: J
+        { { 0, 0, 1, 0 }, { 1, 1, 1, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 6: L
+
+        // --- 4 ĐẠO CỤ MỚI (1x1) ---
+        { { 1, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 7: Bom
+        { { 1, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 8: Clear cột
+        { { 1, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 9: Clear hàng
+        { { 1, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }, // 10: Khối đá
+};
+
+const uint16_t ColorPallette[11] = {
+        RGB565(230, 40, 40),    // 0: Red
+        RGB565(40, 200, 40),    // 1: Green
+        RGB565(40, 100, 240),   // 2: Blue
+        RGB565(255, 140, 0),    // 3: Orange-ish
+        RGB565(240, 220, 20),   // 4: Yellow
+        RGB565(200, 40, 200),   // 5: Magenta
+        RGB565(240, 240, 240),  // 6: White
+        RGB565(255, 69, 0),     // 7: Bom (Đỏ cam lửa cháy)
+        RGB565(0, 255, 255),    // 8: Clear Cột (Cyan)
+        RGB565(127, 255, 212),  // 9: Clear hàng (Aquamarine - Xanh ngọc)
+        RGB565(128, 128, 128)   // 10: Khối đá (Xám trung tính)
+};
 }
 
 TetrisEngine::TetrisEngine() {
-	init();
+    init();
 }
 
 uint32_t my_rand() {
-    // Tham số chuẩn của LCG: a = 1664525, c = 1013904223, m = 2^32
-	static uint32_t seed = 123456789;
-    seed = seed * 1664525 + osKernelGetTickCount();
+    static uint32_t seed = 0;
 
-    seed ^= seed << 13;
-    seed ^= seed >> 17;
-    seed ^= seed << 5;
+    // Chỉ khởi tạo seed 1 lần duy nhất bằng TickCount của RTOS
+    if (seed == 0) {
+        seed = osKernelGetTickCount();
+        if (seed == 0) seed = 123456789; // Đề phòng TickCount trả về 0 lúc khởi động
+    }
 
+    // Thuật toán LCG chuẩn
+    seed = seed * 1664525 + 1013904223;
     return seed;
 }
 
 /**
  * @brief	Khởi tạo giá trị ban đầu cho các thuộc tính, tạo khối mới
- * @param	None
- * @retval	None
  */
 void TetrisEngine::init() {
-	//Khởi tạo giá trị ban đầu cho grid
-    for (auto& row : grid) row.fill(0);
+    for (auto &row : grid) {
+        row.fill(0);
+    }
     gameOver = false;
-    score = 0
-    		;
+    score = 0;
+    nextBlockId = -1;
+    nextBlockColor = 0;
 
-	// Dùng cho tạo khối tiếp theo
-	nextBlockId = -1;
-	nextBlockColor = 0;
-	generateNextBlock();
-
-    //random khối mới
+    generateNextBlock();
     spawnBlock();
 }
 
 /**
- * @brief	Tạo khối mới và color cho khối
- * @param	None
- * @retval	None
+ * @brief	Tạo ID, Color và Matrix cho khối tiếp theo
  */
 void TetrisEngine::generateNextBlock() {
-    nextBlockId = my_rand() % 7;	//lấy next box dựa trên tick hệ thống
-    nextBlockSize = (nextBlockId == 0) ? 4 : 3;
-    nextBlockSize = (nextBlockId == 1) ? 2 : nextBlockSize;
-    nextBlockColor = my_rand() % 7;
-    for (int i = 0; i < 4; ++i)
-        for (int j = 0; j < 4; ++j)
-            nextBlock[i][j] = Tetrominoes[nextBlockId][i][j]; //đánh dấu các ô có thể hiển thị cho next block
-}
+    int r = my_rand() % 100;
 
-/**
- * @brief	Get next block (gán nextBlock, size nextBlock và color cho tham số truyền vào)
- * @param	block: BlockMatrix& khối cần thay đổi
- * @param	size: int& biểu diễn kích thước của khối
- * @param	color: uint16_t& biểu diễn màu của khối
- * @retval	None
- */
-void TetrisEngine::getNextBlock(BlockMatrix& block, int& size, uint16_t& color) const {
-	block = nextBlock;
-	size = nextBlockSize;
-	color = ColorPallette[nextBlockColor];
-}
+    if (r < 85) {
+        // 85% cơ hội ra gạch bình thường (0 đến 6)
+        nextBlockId = my_rand() % 7;
+        nextBlockColor = nextBlockId;
+    } else {
+        // 15% cơ hội rớt ra đạo cụ (7, 8, 9, hoặc 10)
+        // Mình nới %4 thay vì %3 để có thể ra cả Khối đá (10)
+        nextBlockId = 7 + (my_rand() % 4);
+        nextBlockColor = nextBlockId;
+    }
 
-/**
- * @brief	Gán khối mới cho khối hiện tại
- * @param	None
- * @retval	None
- */
-void TetrisEngine::spawnBlock() {
-    if (nextBlockId == -1) generateNextBlock(); // Spawn đầu
-    for (int i = 0; i < 4; ++i)
-        for (int j = 0; j < 4; ++j)
-            currBlock[i][j] = nextBlock[i][j];	//gán nextBlock cho currBlock
-    blockSize = nextBlockSize;
-    currBlockColor = nextBlockColor;
+    // Cập nhật Size chuẩn để xoay tâm
+    if (nextBlockId >= 7) {
+        nextBlockSize = 1;
+    } else if (nextBlockId == 0) { // Khối I
+        nextBlockSize = 4;
+    } else if (nextBlockId == 1) { // Khối O
+        nextBlockSize = 2;
+    } else {
+        nextBlockSize = 3;
+    }
 
-    //bắt đầu rơi tại vị trí giữa trên cùng
-    currX = (GRID_WIDTH - blockSize) / 2;
-    currY = 0;
-    generateNextBlock(); // Tạo khối tiếp theo
-}
-
-/**
- * @brief	Xoay block
- * @param	None
- * @retval	None
- */
-void TetrisEngine::rotateMatrix(BlockMatrix& mat) {
-    BlockMatrix temp = {};
-    for (int i = 0; i < blockSize; ++i)
-        for (int j = 0; j < blockSize; ++j)
-            temp[j][blockSize - 1 - i] = mat[i][j];
-    mat = temp;
-}
-
-/**
- * @brief	Lấy đường biên của block (hình chữ nhật nhỏ nhất chứa được toàn bộ block)
- * @param	block: BlockMatrix& khối cần lấy đường biên
- * @param	minX: int& lưu tọa độ x nhỏ nhất
- * @param	maxX: int& lưu tọa độ x lớn nhất
- * @param	minY: int& lưu tọa độ y nhỏ nhất
- * @param	maxY: int& lưu tọa độ y lớn nhất
- * @retval	None
- */
-void TetrisEngine::getBlockBounds(const BlockMatrix& block, int& minX, int& maxX, int& minY, int& maxY) {
-    minX = blockSize; maxX = 0; minY = blockSize; maxY = 0;
-    for (int i = 0; i < blockSize; ++i)
-        for (int j = 0; j < blockSize; ++j)
-            if (block[i][j]) {
-                if (j < minX) minX = j;
-                if (j > maxX) maxX = j;
-                if (i < minY) minY = i;
-                if (i > maxY) maxY = i;
-            }
-}
-
-/**
- * @brief	Kiểm tra va trạm của khối với tọa độ (x, y) mới
- * @param	newX: int mô tả tọa độ x cần kiểm tra
- * @param	newY: int mô tả tọa độ y cần kiểm tra
- * @param	block: BlockMatrix& khối cần kiểm tra
- * @retval	boolean True - va chạm, False - không va chạm
- */
-bool TetrisEngine::checkCollision(int newX, int newY, const BlockMatrix& block) {
-    int minX, maxX, minY, maxY;
-
-    //lấy bao ngoài của block
-    getBlockBounds(block, minX, maxX, minY, maxY);
-    for (int i = minY; i <= maxY; ++i)
-        for (int j = minX; j <= maxX; ++j)
-            if (block[i][j]) {
-                int gx = newX + j;
-                int gy = newY + i;
-
-                //ra ngoài hoặc ô đã được đặt -> va chạm -> return true
-                if (gx < 0 || gx >= GRID_WIDTH || gy < 0 || gy >= GRID_HEIGHT) return true;
-                if (grid[gy][gx]) return true;
-            }
-    return false;
-}
-
-/**
- * @brief	Cố định lại block trên lưới và tạo khối mới
- * @param	None
- * @retval	None
- */
-void TetrisEngine::lockBlock() {
-    for (int i = 0; i < blockSize; ++i)
-        for (int j = 0; j < blockSize; ++j)
-            if (currBlock[i][j]) {
-                int gx = currX + j;
-                int gy = currY + i;
-                if (gy >= 0 && gy < GRID_HEIGHT && gx >= 0 && gx < GRID_WIDTH)
-                    grid[gy][gx] = currBlockColor + 1;
-            }
-
-    //xóa đường nếu full + gen khối mới
-    clearLines();
-    spawnBlock();
-}
-
-/**
- * @brief	Xóa line nếu cả hàng đã full
- * @param	None
- * @retval	None
- */
-void TetrisEngine::clearLines() {
-	//kiểm tra các hàng từ dưới lên trên
-    for (int y = GRID_HEIGHT - 1; y >= 0; --y) {
-        bool full = true;
-        for (int x = 0; x < GRID_WIDTH; ++x)
-            if (!grid[y][x]) full = false; //-> có 1 ô chưa được đánh dấu -> chưa đầy hàng
-
-        if (full) {
-        	takeScore = true; //đánh dấu được tăng điểm -> bật buzzer sau đó
-        	score++; //tăng điểm
-            for (int row = y; row > 0; --row)
-                grid[row] = grid[row - 1];
-            grid[0].fill(0);
-            ++y; // re-check this row
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            nextBlock[i][j] = Tetrominoes[nextBlockId][i][j];
         }
     }
 }
 
 /**
- * @brief	Check va chạm + khóa khối nếu được
- * @param	None
- * @retval	None
+ * @brief	Get next block
+ */
+void TetrisEngine::getNextBlock(BlockMatrix &block, int &size, uint16_t &color, int &id) const {
+    block = nextBlock;
+    size = nextBlockSize;
+    color = ColorPallette[nextBlockColor];
+    id = nextBlockId;
+}
+
+/**
+ * @brief	Đẩy NextBlock thành CurrBlock và đưa lên đỉnh màn hình
+ */
+void TetrisEngine::spawnBlock() {
+    if (nextBlockId == -1) {
+        generateNextBlock();
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            currBlock[i][j] = nextBlock[i][j];
+        }
+    }
+
+    blockSize = nextBlockSize;
+    currBlockColor = nextBlockColor;
+
+    // Xuất hiện ở giữa cạnh trên
+    currX = (GRID_WIDTH - blockSize) / 2;
+    currY = 0;
+
+    generateNextBlock();
+}
+
+/**
+ * @brief	Thuật toán xoay ma trận 90 độ
+ */
+void TetrisEngine::rotateMatrix(BlockMatrix &mat) {
+    BlockMatrix temp = {0}; // Đảm bảo clear rác
+    for (int i = 0; i < blockSize; ++i) {
+        for (int j = 0; j < blockSize; ++j) {
+            temp[j][blockSize - 1 - i] = mat[i][j];
+        }
+    }
+    mat = temp;
+}
+
+/**
+ * @brief	Lấy giới hạn hình học của khối
+ */
+void TetrisEngine::getBlockBounds(const BlockMatrix &block, int &minX, int &maxX, int &minY, int &maxY) {
+	minX = 4; // Khởi tạo bằng kích thước tối đa
+	    maxX = 0;
+	    minY = 4;
+	    maxY = 0;
+
+	    // ÉP BUỘC QUÉT TOÀN BỘ MA TRẬN 4x4 (Không dùng blockSize nữa)
+	    for (int i = 0; i < 4; ++i) {
+	        for (int j = 0; j < 4; ++j) {
+	            if (block[i][j]) {
+	                if (j < minX) minX = j;
+	                if (j > maxX) maxX = j;
+	                if (i < minY) minY = i;
+	                if (i > maxY) maxY = i;
+	            }
+	        }
+	    }
+}
+
+/**
+ * @brief	Kiểm tra va chạm
+ */
+bool TetrisEngine::checkCollision(int newX, int newY, const BlockMatrix &block) {
+    int minX, maxX, minY, maxY;
+    getBlockBounds(block, minX, maxX, minY, maxY);
+
+    for (int i = minY; i <= maxY; ++i) {
+        for (int j = minX; j <= maxX; ++j) {
+            if (block[i][j]) {
+                int gx = newX + j;
+                int gy = newY + i;
+
+                if (gx < 0 || gx >= GRID_WIDTH || gy < 0 || gy >= GRID_HEIGHT)
+                    return true;
+                if (grid[gy][gx] != 0) // Nếu ô đã có gạch
+                    return true;
+            }
+        }
+    }
+    return false;
+}
+
+/**
+ * @brief	Khóa khối hoặc thực thi logic Đạo cụ đặc biệt
+ */
+void TetrisEngine::lockBlock() {
+    // 1. Kiểm tra xem có phải là đạo cụ đặc biệt không (Bom, Clear Col, Clear Row)
+    if (currBlockColor >= 7 && currBlockColor <= 9) {
+        int itemX = currX;
+        int itemY = currY;
+
+        // Thực thi hiệu ứng
+        if (currBlockColor == 7) { // 7: Bom nổ 3x3
+            for (int dy = -1; dy <= 1; dy++) {
+                for (int dx = -1; dx <= 1; dx++) {
+                    int nx = itemX + dx;
+                    int ny = itemY + dy;
+                    if (nx >= 0 && nx < GRID_WIDTH && ny >= 0 && ny < GRID_HEIGHT) {
+                        grid[ny][nx] = 0; // Clear ô
+                    }
+                }
+            }
+
+        }
+        else if (currBlockColor == 8) { // 8: Clear cột
+            for (int y = 0; y < GRID_HEIGHT; y++) {
+                grid[y][itemX] = 0;
+            }
+
+        }
+        else if (currBlockColor == 9) { // 9: Clear hàng
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                grid[itemY][x] = 0;
+            }
+
+        }
+        takeScore = true; // Kích hoạt còi báo hiệu ăn điểm
+        score += point;
+    }
+    else {
+        // 2. Nếu là khối bình thường hoặc Khối Đá (10) thì cố định vào Grid
+        for (int i = 0; i < blockSize; ++i) {
+            for (int j = 0; j < blockSize; ++j) {
+                if (currBlock[i][j]) {
+                    int gx = currX + j;
+                    int gy = currY + i;
+                    if (gy >= 0 && gy < GRID_HEIGHT && gx >= 0 && gx < GRID_WIDTH) {
+                        grid[gy][gx] = currBlockColor + 1; // +1 để khác 0
+                    }
+                }
+            }
+        }
+    }
+
+    // --- CHU TRÌNH RỤNG VÀ QUÉT HÀNG CHUẨN ---
+            bool actionHappened;
+            do {
+                actionHappened = false;
+
+                // 1. Luôn ưu tiên kéo các mảng lơ lửng rụng xuống trước
+                if (applyGravity()) {
+                    actionHappened = true;
+                }
+
+                // 2. Quét xem sau khi rơi có tạo thành hàng ngang nào đầy không
+                int oldScore = score;
+                clearLines();
+                if (score > oldScore) {
+                    actionHappened = true;
+                }
+
+            } while (actionHappened); // Tiếp tục nếu vẫn còn rơi hoặc vẫn còn hàng ăn được
+
+            spawnBlock(); // Sinh khối mới
+}
+
+/**
+ * @brief Cơ chế Sticky Gravity (Trọng lực kết dính)
+ * @retval bool: Trả về true nếu có bất kỳ khối nào bị kéo rụng xuống
+ */
+bool TetrisEngine::applyGravity() {
+    bool everMoved = false;
+    bool moved;
+
+    do {
+        moved = false;
+
+        // Bước 1: Thuật toán Loang tìm các ô vững chắc (Stable)
+        bool stable[GRID_HEIGHT][GRID_WIDTH] = {false};
+        bool stableChanged = true;
+
+        while (stableChanged) {
+            stableChanged = false;
+            for (int y = 0; y < GRID_HEIGHT; ++y) {
+                for (int x = 0; x < GRID_WIDTH; ++x) {
+                    if (grid[y][x] != 0 && !stable[y][x]) {
+                        bool isStable = false;
+
+                        if (y == GRID_HEIGHT - 1) isStable = true;
+                        else if (grid[y + 1][x] != 0 && stable[y + 1][x]) isStable = true;
+                        else if (x > 0 && grid[y][x - 1] != 0 && stable[y][x - 1]) isStable = true;
+                        else if (x < GRID_WIDTH - 1 && grid[y][x + 1] != 0 && stable[y][x + 1]) isStable = true;
+                        else if (y > 0 && grid[y - 1][x] != 0 && stable[y - 1][x]) isStable = true;
+
+                        if (isStable) {
+                            stable[y][x] = true;
+                            stableChanged = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Bước 2: Kéo TẤT CẢ các cụm gạch không vững chắc rơi xuống 1 ô
+        for (int y = GRID_HEIGHT - 2; y >= 0; --y) {
+            for (int x = 0; x < GRID_WIDTH; ++x) {
+                if (grid[y][x] != 0 && !stable[y][x]) {
+                    grid[y + 1][x] = grid[y][x]; // Kéo gạch xuống
+                    grid[y][x] = 0;              // Xóa ô cũ
+                    moved = true;
+                    everMoved = true;            // Ghi nhận là có xảy ra sự rơi
+                }
+            }
+        }
+    } while (moved); // Lặp liên tục cho đến khi tất cả chạm đáy
+
+    return everMoved;
+}
+
+/**
+ * @brief	Quét và xóa hàng khi đầy
+ */
+void TetrisEngine::clearLines() {
+    for (int y = GRID_HEIGHT - 1; y >= 0; --y) {
+        bool full = true;
+        bool hasStone = false; // Biến cờ kiểm tra xem hàng có khối đá không
+
+        for (int x = 0; x < GRID_WIDTH; ++x) {
+            if (grid[y][x] == 0) {
+                full = false;
+                break; // Có ô trống -> Chưa đầy -> Thoát sớm
+            }
+            if (grid[y][x] == 11) {
+                // 11 chính là ID của Khối đá (10 + 1)
+                hasStone = true;
+            }
+        }
+
+        // CHỈ xóa hàng khi ĐẦY và KHÔNG CÓ KHỐI ĐÁ
+        if (full && !hasStone) {
+            takeScore = true;
+            score += point;
+
+            // Dịch các hàng phía trên xuống
+            for (int row = y; row > 0; --row) {
+                grid[row] = grid[row - 1];
+            }
+            grid[0].fill(0); // Làm trống hàng trên cùng
+
+            ++y; // Re-check hàng hiện tại vì vừa bị dịch xuống
+        }
+    }
+}
+/**
+ * @brief	Cập nhật game loop (rơi tự do)
  */
 void TetrisEngine::update() {
-	if(!gameOver){
-		if (!checkCollision(currX, currY + 1, currBlock))
-			currY++;
-		else{
-			lockBlock();
-			for(int i = 0; i < GRID_WIDTH; i++)
-				if(grid[0][i]) gameOver = true; //hàng trên cùng có khối -> game over
-		}
-	}
+    if (gameOver) return;
 
+    if (!checkCollision(currX, currY + 1, currBlock)) {
+        currY++;
+    } else {
+        lockBlock();
+        // Check thua: nếu hàng trên cùng bị chiếm
+        for (int i = 0; i < GRID_WIDTH; i++) {
+            if (grid[0][i]) {
+                gameOver = true;
+                break;
+            }
+        }
+    }
 }
 
-/**
- * @brief	Di chuyển trái
- * @param	None
- * @retval	None
- */
 void TetrisEngine::moveLeft() {
-	if(gameOver) return;
-	//kiểm tra trước khi di chuyển
-    if (!checkCollision(currX - 1, currY, currBlock)) currX--;
+    if (!gameOver && !checkCollision(currX - 1, currY, currBlock)) {
+        currX--;
+    }
 }
 
-/**
- * @brief	Di chuyển phải
- * @param	None
- * @retval	None
- */
 void TetrisEngine::moveRight() {
-	if(gameOver) return;
-	//kiểm tra trước khi di chuyển
-    if (!checkCollision(currX + 1, currY, currBlock)) currX++;
+    if (!gameOver && !checkCollision(currX + 1, currY, currBlock)) {
+        currX++;
+    }
 }
 
-/**
- * @brief	Thả block
- * @param	None
- * @retval	None
- */
 void TetrisEngine::drop() {
-	if(gameOver) return;
-	//kiểm tra trước khi di chuyển
-    while (!checkCollision(currX, currY + 1, currBlock)) currY++;
+    if (gameOver) return;
+
+    while (!checkCollision(currX, currY + 1, currBlock)) {
+        currY++;
+    }
     lockBlock();
 }
 
-/**
- * @brief	Xoay block
- * @param	None
- * @retval	None
- */
 void TetrisEngine::rotate() {
-	if(gameOver) return;
+    if (gameOver) return;
+
     BlockMatrix temp = currBlock;
     rotateMatrix(temp);
-    //kiểm tra trước khi di chuyển
-    if (!checkCollision(currX, currY, temp))
+
+    if (!checkCollision(currX, currY, temp)) {
         currBlock = temp;
+    }
 }
 
-/**
- * @brief	Lấy màu của khối đang rơi
- * @param	None
- * @retval	uint16_t màu của khối
- */
 uint16_t TetrisEngine::getCurrentBlockColor() const {
-	return ColorPallette[currBlockColor];
+    return ColorPallette[currBlockColor];
 }
 
-/**
- * @brief	Lấy màu của lưới
- * @param	x: int biểu diễn tọa độ cần lấy màu
- * @param	y: int biểu diễn tọa độ cần lấy màu
- * @retval	uint16_t màu của ô
- */
 uint16_t TetrisEngine::getGridColor(int x, int y) const {
-	if(grid[y][x] == 0) return 0x0000;
-	return ColorPallette[grid[y][x] - 1];
+    if (grid[y][x] == 0) return 0x0000; // Nền đen
+    return ColorPallette[grid[y][x] - 1];
+}
+void TetrisEngine::selectLevel(char res)
+{
+	if(res == 'e') point = 1;
+	else if(res == 'm') point = 2;
+	else if(res == 'h') point = 3;
+	else point = -1;
 }

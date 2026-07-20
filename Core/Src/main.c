@@ -121,7 +121,7 @@ static void MX_DMA2D_Init(void);
 static void MX_UART_Init(void);
 void MovingTask(void *argument);
 extern void TouchGFX_Task(void *argument);
-
+void VibrateTask(void *argument);
 /* USER CODE BEGIN PFP */
 static void BSP_SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_CommandTypeDef *Command);
 
@@ -202,13 +202,6 @@ int main(void)
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
 
-  HAL_Delay(1000);
-  DF_SendCommand(0x3F, 0, 0);
-  HAL_Delay(200);
-  DF_SendCommand(0x06, 0x00, 15);
-  HAL_Delay(200);
-  DF_SendCommand(0x0F, 0x02, 0x02);
-
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -233,6 +226,12 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
+  const osThreadAttr_t VibrateTask_attributes = {
+      .name = "vibrateTask",
+      .stack_size = 128 * 4,
+      .priority = (osPriority_t) osPriorityNormal,
+    };
+    osThreadNew(VibrateTask, NULL, &VibrateTask_attributes);
   /* creation of defaultTask */
   movingTaskHandle = osThreadNew(MovingTask, NULL, &movingTask_attributes);
 
@@ -1074,41 +1073,20 @@ void MovingTask(void *argument){
   * @param  param: void* not used
   * @retval None
   */
-void VibrateTask(void *param){
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
-	osDelay(2000);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
-	HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13);
-	osThreadExit();
-}
+volatile uint8_t triggerVibrate = 0; // Biến cờ toàn cục
 
-/**
-  * @brief	Task cho bật nhạc game over
-  * @param  param: void* not used
-  * @retval None
-  */
-void GameOverTask(void *param){
-	DF_SendCommand(0x0F, 0x02, 0x03);
-	osDelay(2000);
-	if(currScreen == 1)	DF_SendCommand(0x0F, 0x02, 0x02);
-	else if(currScreen == 3) DF_SendCommand(0x0F, 0x02, 0x01);
-	osThreadExit();
-}
+void VibrateTask(void *argument) {
+    for(;;) {
+        if (triggerVibrate == 1) {
+            triggerVibrate = 0; // Xóa cờ
 
-/**
-  * @brief	Gửi command cho module dfplayer
-  * @param  cmd: uint8_t command cần gửi
-  * @param  param1: uint8_t tham số thứ nhất
-  * @param  param2: uint8_t tham số thứ hai
-  * @retval None
-  */
-void DF_SendCommand(uint8_t cmd, uint8_t param1, uint8_t param2){
-	uint8_t buffer[10] = {0x7E, 0xFF, 0x06, cmd, 0x00, param1, param2, 0x00, 0x00, 0xEF};
-	uint16_t checksum = -(buffer[1] + buffer[2] + buffer[3] + buffer[4] + buffer[5] + buffer[6]);
-	buffer[7] = (checksum >> 8) & 0xFF;
-	buffer[8] = checksum & 0xFF;
-
-	HAL_UART_Transmit(&huart4, buffer, 10, HAL_MAX_DELAY);
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
+            osDelay(1000); // Rung theo thời gian được yêu cầu
+            HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_RESET);
+            HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13);
+        }
+        osDelay(10);
+    }
 }
 
 uint32_t GetSector(uint32_t Address)
@@ -1203,31 +1181,38 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	static uint32_t last_time = 0;
 	if(GPIO_Pin == GPIO_PIN_0){
-		DF_SendCommand(0x19, 0x00, 0x00);
+		triggerVibrate = 1;
 		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13);
 	}else{
-		if(HAL_GetTick() - last_time < 200) return;
-		last_time = HAL_GetTick();
-
-		//kiểm tra nút bấm tương ứng và đánh dấu nút bấm
 		char res = 0;
+
 	    switch (GPIO_Pin)
 	    {
 	        case GPIO_PIN_12:
+	        	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) == GPIO_PIN_RESET) return;
 	            res = 'L';	//left
 	            break;
 	        case GPIO_PIN_13:
+	        	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13) == GPIO_PIN_RESET) return;
 	            res = 'R';	//right
 	            break;
 	        case GPIO_PIN_2:
+	        	if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_2) == GPIO_PIN_RESET) return;
 	            res = 'T';	//rotate
 	            break;
 	        case GPIO_PIN_3:
+	        	if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_3) == GPIO_PIN_RESET) return;
 	            res = 'D';	//down
 	            break;
 	        default:
 	            return;
 	    }
+
+		// BƯỚC 2: CHỐNG DỘI PHÍM (DEBOUNCE)
+		// Nếu đã qua được Bước 1 nghĩa là nút xịn thực sự được bấm, lúc này mới khóa timer 200ms
+		if(HAL_GetTick() - last_time < 200) return;
+		last_time = HAL_GetTick();
+
 	    last_button = res;
 	    //set cờ 0x01 -> thông báo movingTask (trigger)
 	    osThreadFlagsSet(movingTaskHandle, 0x01);

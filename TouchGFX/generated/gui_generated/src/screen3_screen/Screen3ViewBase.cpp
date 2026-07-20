@@ -13,6 +13,10 @@ Screen3ViewBase::Screen3ViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
+    image2.setXY(-32, 69);
+    image2.setBitmap(touchgfx::Bitmap(BITMAP_GAMEOVER1_ID));
+    add(image2);
+
     image1.setXY(0, 0);
     image1.setBitmap(touchgfx::Bitmap(BITMAP_SCREEN_MAIN_GAME1_ID));
     add(image1);
@@ -42,10 +46,6 @@ Screen3ViewBase::Screen3ViewBase() :
     score.setWildcard(scoreBuffer);
     score.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HSY0));
     add(score);
-
-    image2.setXY(-29, 74);
-    image2.setBitmap(touchgfx::Bitmap(BITMAP_GAMEOVER_ID));
-    add(image2);
 
     textArea3.setXY(173, 181);
     textArea3.setColor(touchgfx::Color::getColorFromRGB(240, 17, 17));

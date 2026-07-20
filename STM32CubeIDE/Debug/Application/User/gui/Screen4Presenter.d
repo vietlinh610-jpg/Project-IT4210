@@ -1,5 +1,5 @@
 Application/User/gui/Screen4Presenter.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen4_screen/Screen4Presenter.cpp \
+ C:/Projects/Tetris/TouchGFX/gui/src/screen4_screen/Screen4Presenter.cpp \
  ../../TouchGFX/gui/include/gui/screen4_screen/Screen4View.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/screen4_screen/Screen4ViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \

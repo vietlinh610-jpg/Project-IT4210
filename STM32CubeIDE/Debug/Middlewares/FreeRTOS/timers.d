@@ -1,5 +1,5 @@
 Middlewares/FreeRTOS/timers.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/Middlewares/Third_Party/FreeRTOS/Source/timers.c \
+ C:/Projects/Tetris/Middlewares/Third_Party/FreeRTOS/Source/timers.c \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../../Core/Inc/FreeRTOSConfig.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \

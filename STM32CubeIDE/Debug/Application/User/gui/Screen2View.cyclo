@@ -1,11 +1,11 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	1
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:16:6:virtual void Screen2View::tearDownScreen()	1
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:21:6:virtual void Screen2View::easyBtn()	2
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:30:6:virtual void Screen2View::mediumBtn()	2
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:39:6:virtual void Screen2View::hardBtn()	2
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:16:6:virtual void Screen2View::tearDownScreen()	1
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:21:6:virtual void Screen2View::easyBtn()	2
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:30:6:virtual void Screen2View::mediumBtn()	2
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:39:6:virtual void Screen2View::hardBtn()	2
 ../../TouchGFX/gui/include/gui/screen2_screen/Screen2View.hpp:11:13:Screen2View::~Screen2View()	1
 ../../TouchGFX/gui/include/gui/screen2_screen/Screen2View.hpp:11:13:virtual Screen2View::~Screen2View()	1
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:6:1:Screen2View::Screen2View()	1
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:11:6:virtual void Screen2View::setupScreen()	1
-C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:49:6:virtual void Screen2View::handleTickEvent()	1
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:6:1:Screen2View::Screen2View()	1
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:11:6:virtual void Screen2View::setupScreen()	1
+C:/Projects/Tetris/TouchGFX/gui/src/screen2_screen/Screen2View.cpp:49:6:virtual void Screen2View::handleTickEvent()	1

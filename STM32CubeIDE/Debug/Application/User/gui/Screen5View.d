@@ -1,5 +1,5 @@
 Application/User/gui/Screen5View.o: \
- C:/Users/Admin/Downloads/Project-IT4210-main/TouchGFX/gui/src/screen5_screen/Screen5View.cpp \
+ C:/Projects/Tetris/TouchGFX/gui/src/screen5_screen/Screen5View.cpp \
  ../../TouchGFX/gui/include/gui/screen5_screen/Screen5View.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/screen5_screen/Screen5ViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \

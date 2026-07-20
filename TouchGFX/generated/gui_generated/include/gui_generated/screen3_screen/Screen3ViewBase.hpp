@@ -37,12 +37,12 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
+    touchgfx::Image image2;
     touchgfx::Image image1;
     touchgfx::IconButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea2;
     touchgfx::TextAreaWithOneWildcard score;
-    touchgfx::Image image2;
     touchgfx::TextAreaWithOneWildcard textArea3;
     touchgfx::IconButtonStyle< touchgfx::ToggleButtonTrigger >  flexButton2;
 
