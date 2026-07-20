@@ -39,11 +39,11 @@ __Sản phẩm:__
   |3V|VCC| |
   |5V| |VCC|
   |GND| |GND|
-  |PC3| |in|
-  |PG2|rotate| |
-  |PG3|down| |
-  |PB12|left| |
-  |PB13|right| |
+  |PC3| |IN|
+  |PG2|ROTATE| |
+  |PG3|DOWN| |
+  |PB12|LEFT| |
+  |PB13|RIGHT| |
   
 ### TÍCH HỢP HỆ THỐNG
 
