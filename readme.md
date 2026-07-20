@@ -120,14 +120,8 @@ __Sản phẩm:__
                 default:
                     return;
             }
-...
         }
     }
-  ```
-*__[Screen1View.cpp](TouchGFX/gui/src/screen1_screen/Screen1View.cpp)__*
-* ```C
-   /**  Hiển thị điểm cao nhất người dùng đạt đ
-
   ```
 *__[Screen2View.cpp](TouchGFX/gui/src/screen2_screen/Screen2View.cpp)__*
 * ```C
@@ -214,10 +208,10 @@ void Screen3View::drawGrid() {
 *__[TetrisEngine.hpp](Middlewares/Third_Party/FreeRTOS/Source/include/TetrisEngine.hpp)__*
 * ```C
 // Khai báo các khối cơ bản và các khối mở rộng như đá bom...
-const int Tetrominoes[11][4][4] = {} 
-
+const int Tetrominoes[11][4][4] = {}
 // Hàm khai báo màu cho từng khối
 const uint16_t ColorPallette[11] = {}
+```
   /**
 *__[TetrisEngine.cpp](STM32CubeIDE/Application/User/TetrisEngine.cpp)__*
 * ```C
